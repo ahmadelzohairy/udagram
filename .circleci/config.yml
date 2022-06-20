@@ -36,20 +36,6 @@ jobs:
           name: API Build
           command: |
             npm run api:build
-  test:
-    docker:
-      - image: "cimg/base:stable"
-    steps:
-      - node/install
-      - checkout
-      - install_client
-      - install_server
-      - run: 
-          name: Test Client 
-          command: yarn client:test
-      - run: 
-          name: Test Server 
-          command: yarn server:test
   # deploy step will run only after manual approval
   deploy:
     docker:
@@ -68,18 +54,18 @@ jobs:
           name: Deploy Server 
           command: npm run api:deploy
             
-# workflows:
-#   udagram:
-#     jobs:
-#       - build
-#       - hold:
-#           filters:
-#             branches:
-#               only:
-#                 - master
-#           type: approval
-#           requires:
-#             - build
-#       - deploy:
-#           requires:
-#             - hold
+workflows:
+  udagram:
+    jobs:
+      - build
+      - hold:
+          filters:
+            branches:
+              only:
+                - master
+          type: approval
+          requires:
+            - build
+      - deploy:
+          requires:
+            - hold
