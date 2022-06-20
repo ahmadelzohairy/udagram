@@ -58,11 +58,6 @@ workflows:
     jobs:
       - build
       - hold:
-          filters:
-            branches:
-              only:
-                - main
-                - master
           type: approval
           requires:
             - build
