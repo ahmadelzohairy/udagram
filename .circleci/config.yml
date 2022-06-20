@@ -55,18 +55,18 @@ jobs:
             echo "NPM --version" 
             echo $(npm --version)
             npm run frontend:install
-      - run:
-          name: Install API Dependencies
-          command: |
-            npm run api:install
-      - run:
-          name: Front-End Build
-          command: |
-            npm run frontend:build
-      - run:
-          name: API Build
-          command: |
-            npm run api:build
+      # - run:
+      #     name: Install API Dependencies
+      #     command: |
+      #       npm run api:install
+      # - run:
+      #     name: Front-End Build
+      #     command: |
+      #       npm run frontend:build
+      # - run:
+      #     name: API Build
+      #     command: |
+      #       npm run api:build
       - run:
           name: Deploy Front-End
           command: npm run frontend:deploy
