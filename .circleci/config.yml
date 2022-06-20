@@ -36,6 +36,20 @@ jobs:
           name: API Build
           command: |
             npm run api:build
+  test:
+    docker:
+      - image: "cimg/base:stable"
+    steps:
+      - node/install
+      - checkout
+      - install_client
+      - install_server
+      - run: 
+          name: Test Client 
+          command: yarn client:test
+      - run: 
+          name: Test Server 
+          command: yarn server:test
   # deploy step will run only after manual approval
   deploy:
     docker:
