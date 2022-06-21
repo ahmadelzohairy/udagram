@@ -36,6 +36,37 @@ jobs:
           name: API Build
           command: |
             npm run api:build
+  test:
+    docker:
+      - image: "cimg/base:stable"
+    steps:
+      - node/install
+      - node/install-yarn
+      - checkout
+      - run:
+          name: Install Front-End Dependencies
+          command: |
+            echo "NODE --version" 
+            echo $(node --version)
+            echo "NPM --version" 
+            echo $(npm --version)
+            npm run frontend:install
+      - run:
+          name: Install API Dependencies
+          command: |
+            npm run api:install
+      - run:
+          name: Front-End Build
+          command: |
+            npm run frontend:build
+      - run:
+          name: API Build
+          command: |
+            npm run api:build
+      - run: 
+          name: Test Front-End 
+          command: npm run frontend:test
+
   # deploy step will run only after manual approval
   deploy:
     docker:
@@ -78,6 +109,7 @@ workflows:
   udagram:
     jobs:
       - build
+      - test
       - hold:
           type: approval
           requires:
