@@ -10,7 +10,6 @@ export const config = {
   username: `${process.env.POSTGRES_USERNAME}`,
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
-  dbPort: Number(process.env.DB_PORT),
   port: Number(process.env.PORT),
   host: process.env.POSTGRES_HOST,
   dialect: "postgres",
@@ -18,7 +17,5 @@ export const config = {
   aws_profile: process.env.AWS_PROFILE,
   aws_media_bucket: process.env.AWS_BUCKET,
   url: process.env.URL,
-  jwt: {
-    secret: process.env.JWT_SECRET,
-  },
+  jwt: {secret: "secret"}
 };

@@ -7,15 +7,14 @@
   },
   "main": "src/server.ts",
   "scripts": {
-    "start": "npm run build && node ./www/server.js",
+    "zip": "bestzip Archive.zip .",
+    "start": "node ./www/server.js",
     "tsc": "npx tsc",
     "dev": "npx ts-node-dev --respawn --transpileOnly ./src/server.ts",
     "prod": "npx tsc && node ./www/server.js",
     "clean": "rm -rf www/ || true",
-    "deploy": "npm run build && eb list && eb use Udagramapi-env-1 && eb deploy",
-    "zip": "bestzip Archive.zip .",
-    "copy": "cp -rf src/config www/config && cp .npmrc www/.npmrc && cp package.json www/package.json",
-    "build": "npm run clean && npx tsc && npm run copy && cd www && npm run zip && cd ..",
+    "deploy": "npm run build && eb list && eb use udagram-api-dev && eb deploy",
+    "build": "npm install . && npm run clean && tsc && cp -rf src/config www/config && cp -R .elasticbeanstalk www/.elasticbeanstalk && cp .npmrc www/.npmrc && cp package.json www/package.json && cd www && npm run zip && cd ..",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -41,7 +40,6 @@
   "devDependencies": {
     "@types/bluebird": "^3.5.26",
     "@types/cors": "^2.8.6",
-    "@types/dotenv": "^8.2.0",
     "@types/express": "^4.16.1",
     "@types/node": "^11.11.6",
     "@types/sequelize": "^4.27.44",
