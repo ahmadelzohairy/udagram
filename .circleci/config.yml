@@ -80,6 +80,10 @@ workflows:
     jobs:
       - build
       - hold:
+          filters:
+            branches:
+              only:
+                - master
           type: approval
           requires:
             - build
